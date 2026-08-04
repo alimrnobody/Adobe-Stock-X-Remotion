@@ -9,7 +9,7 @@ Config.setChromiumOpenGlRenderer('angle');
 // ── Concurrency: more parallel Chromium instances ────────────────────────────
 // GPU-accelerated rendering sustains higher concurrency than CPU-only.
 // Lower this (e.g. 8) if you see out-of-memory errors during heavy renders.
-Config.setConcurrency(16);
+Config.setConcurrency(8);
 
 // NOTE: Remotion bundles its own FFmpeg compiled without h264_nvenc/hevc_nvenc.
 // NVENC hardware encoding is therefore NOT available through Remotion's pipeline.

@@ -1,0 +1,149 @@
+1. Sunset Warmth
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blurred blobs (blur 220px) slowly drift in sin/cos paths. Colors: #ff9a5a, #ff6b6b, #ffd280, #c8467a, #ffb37a on base #2a1810. Blobs breathe (scale 0.9↔1.1). Subtle film grain. Soft vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+2. Ocean Calm
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 large blobs (blur 260px) drifting horizontally in wave motion. Colors: #1e6091, #168aad, #34a0a4, #52b69a on base #0b1f2a. Gentle scale pulse. Fine grain overlay. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+3. Dreamy Purple
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 6 blobs (blur 200px) rotating around center slowly. Colors: #7b2ff7, #9d4edd, #c77dff, #e0aaff, #5a189a, #b5179e on base #150a2b. Opacity shimmer 0.7↔1.0. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+4. Corporate Blue
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 240px) slow diagonal drift. Colors: #0077b6, #0096c7, #48cae4, #023e8a on base #03111f. Minimal, professional. Very fine grain. Clean vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+5. Neon Cyberpunk
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 180px) fast-ish drift with glow. Colors: #ff006e, #8338ec, #3a86ff, #06ffa5, #fb5607 on base #0a0014. Higher saturation, subtle color pulse. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+6. Pastel Soft
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 6 blobs (blur 230px) very slow float. Colors: #ffc8dd, #ffafcc, #bde0fe, #a2d2ff, #cdb4db, #ffd6a5 on base #fef6ff. Airy, gentle. Barely-there grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+7. Monochrome Gray
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 250px) slow drift. Colors: #495057, #6c757d, #adb5bd, #343a40 on base #212529. Elegant, minimal. Fine grain. Strong vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+8. Golden Luxury
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 210px) slow orbit. Colors: #b8860b, #daa520, #ffd700, #8b6914, #c9a227 on base #1a1200. Rich, warm. Shimmer opacity. Soft grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+9. Emerald Forest
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 220px) drift upward gently. Colors: #2d6a4f, #40916c, #52b788, #74c69d, #1b4332 on base #081c15. Natural, calm. Fine grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+10. Lava Fire
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 200px) rising heat motion. Colors: #e01e37, #ff4d00, #ff7b00, #ffa200, #8b0000 on base #1a0500. Intense warm glow. Subtle grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+11. Aurora Borealis
+Remotion, 3840x2160, 60fps, 12s/360 frames. Seamless loop. 6 elongated blobs (blur 240px) waving vertically. Colors: #06ffa5, #00d4ff, #7b2ff7, #39ff14, #00b4d8, #5a189a on base #020814. Ethereal flowing motion. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+12. Candy Pop
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 6 blobs (blur 190px) bouncy float. Colors: #ff5d8f, #ff9e00, #00bbf9, #00f5d4, #f15bb5, #fee440 on base #fff0f5. Fun, vibrant. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+13. Deep Space
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 260px) very slow drift. Colors: #3a0ca3, #480ca8, #560bad, #7209b7, #3f37c9 on base #03010d. Cosmic, mysterious. Fine grain + heavy vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+14. Teal & Orange (Cinematic)
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 230px) slow diagonal drift. Colors: #ff6b35, #f7931e, #008891, #00587a on base #0a1a1f. Classic film look. Soft grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+15. Rose Gold
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 220px) gentle orbit. Colors: #e8b4b8, #eed6d3, #d4a5a5, #b76e79, #f7cac9 on base #2b1a1d. Soft luxury. Shimmer. Fine grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+16. Mint Fresh
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 210px) light float. Colors: #95d5b2, #74c69d, #b7e4c7, #d8f3dc, #52b788 on base #1b3a2f. Clean, fresh. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+17. Coral Reef
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 200px) slow drift. Colors: #ff7f51, #ff9b54, #ce4257, #ff5c8a, #4cc9f0 on base #1a0d14. Warm-cool mix. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+18. Midnight Blue
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 4 blobs (blur 250px) very slow drift. Colors: #03045e, #023e8a, #0077b6, #0096c7 on base #01011a. Deep, calm. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+19. Peach Cream
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 220px) gentle float. Colors: #ffcdb2, #ffb4a2, #e5989b, #ffdab9, #fcbf49 on base #3a2418. Soft warm. Barely grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+20. Electric Violet
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 190px) drift with glow pulse. Colors: #9d4edd, #c77dff, #7b2ff7, #e0aaff, #ff6ec7 on base #0d0221. Vibrant. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+21. Sage Earth
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 230px) slow drift. Colors: #a3b18a, #588157, #3a5a40, #dad7cd, #6b8f71 on base #22271f. Muted natural. Fine grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+22. Crimson Wine
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 240px) slow orbit. Colors: #800020, #9e2a2b, #c9184a, #a4133c on base #1a0008. Deep, rich. Soft grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+23. Sky Serenity
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 240px) very slow horizontal drift. Colors: #caf0f8, #90e0ef, #48cae4, #ade8f4, #00b4d8 on base #023047. Calm daytime. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+24. Amber Glow
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 210px) warm float. Colors: #ffbf69, #ff9f1c, #cb7f2f, #ffd29d, #e08e0b on base #241300. Cozy warm. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+25. Ice Blue
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 4 blobs (blur 250px) slow drift. Colors: #a9d6e5, #89c2d9, #61a5c2, #468faf on base #012a4a. Cool crisp. Fine grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+26. Tropical Sunset
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 6 blobs (blur 200px) drift. Colors: #f72585, #ff6d00, #ffb700, #7209b7, #ff4d6d, #ffaa00 on base #1a0011. Vivid tropical. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+27. Charcoal & Ember
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 230px) slow drift. Colors: #2b2d42, #8d99ae, #ef233c, #d90429 on base #0d0d12. Dark with warm accent. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+28. Lavender Fields
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 220px) gentle float. Colors: #b8b8ff, #9381ff, #c8b6ff, #e7c6ff, #8e7dbe on base #1e1a33. Soft dreamy. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+29. Jungle Green
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 210px) drift. Colors: #004b23, #006400, #008000, #38b000, #70e000 on base #02150a. Lush deep green. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+30. Bubblegum
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 6 blobs (blur 190px) bouncy float. Colors: #ff85a1, #ff9ebb, #fbb1bd, #ffc2d1, #ffb3c6, #ff8fab on base #fff0f3. Playful pink. Barely grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+31. Slate Storm
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 4 blobs (blur 250px) slow moody drift. Colors: #38414a, #5c6b73, #9db4c0, #253237 on base #161c1f. Overcast mood. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+32. Mango Tango
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 200px) drift. Colors: #ff9f1c, #ffbf69, #ff6700, #f4a261, #e76f51 on base #2b1200. Juicy warm. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+33. Arctic Teal
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 230px) slow drift. Colors: #2ec4b6, #cbf3f0, #5fdde5, #48bfe3, #56cfe1 on base #022b3a . Cool minty. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+34. Berry Smoothie
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 200px) drift. Colors: #6a0572, #ab2f7c, #e01e8b, #f15bb5, #9b5de5 on base #12001a. Rich berry tones. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+35. Sand Dune
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 230px) slow drift. Colors: #e9c46a, #f4a261, #ddb892, #c9a66b, #b08968 on base #2b1d0f. Warm desert. Fine grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+36. Cyber Mint
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 180px) drift with glow. Colors: #06ffa5, #00f5d4, #00bbf9, #0affef, #38ff9c on base #00120e. Fresh techy. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+37. Dusty Rose
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 220px) gentle float. Colors: #c9989c, #dbb2b6, #a76d77, #e8c1c5, #8f5a63 on base #241417. Muted romantic. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+38. Cobalt Energy
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 220px) drift with pulse. Colors: #0353a4, #023e7d, #0466c8, #33a1fd on base #001233. Bold blue. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+39. Autumn Leaves
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 210px) slow drift. Colors: #bc6c25, #dda15e, #a63a00, #e07a1f, #8a3b00 on base #20100a. Warm autumn. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+40. Iris Bloom
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 6 blobs (blur 200px) orbit slowly. Colors: #5f0f40, #9a031e, #c73e1d, #3a0ca3, #7209b7, #b5179e on base #0e0016. Deep floral mix. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+41. Seafoam
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 5 blobs (blur 230px) slow wave drift. Colors: #99e2b4, #88d4ab, #78c6a3, #67b99a, #56ab91 on base #0f2a24. Soft aqua-green. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+42. Ruby Night
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 4 blobs (blur 240px) slow drift. Colors: #590d22, #800f2f, #a4133c, #c9184a on base #0d0106. Dark romantic red. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+43. Lemon Zest
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 200px) light float. Colors: #fff3b0, #ffdd4a, #fcd34d, #f4e04d, #e9c46a on base #2b2600. Bright cheerful. Barely grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+44. Steel Blue Pro
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 4 blobs (blur 250px) very slow drift. Colors: #415a77, #778da9, #1b263b, #5c7599 on base #0d1b2a. Corporate calm. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+45. Flamingo
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 200px) drift. Colors: #ff5d8f, #ff8fab, #fb6f92, #ffb3c6, #ff477e on base #2b0a14. Bold pink. Light grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+46. Northern Ice
+Remotion, 3840x2160, 60fps, 12s/360 frames. Seamless loop. 6 blobs (blur 240px) slow flowing motion. Colors: #caf0f8, #90e0ef, #48cae4, #00b4d8, #0096c7, #ade8f4 on base #03045e. Cool ethereal. Minimal grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+47. Espresso Warmth
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 4 blobs (blur 230px) slow drift. Colors: #6f4518, #8b5e34, #a47148, #c8925e on base #1a0f05. Cozy coffee tones. Fine grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+48. Prism Rainbow
+Remotion, 3840x2160, 60fps, 12s/360 frames. Seamless loop. 7 blobs (blur 200px) slow orbit. Colors: #ff595e, #ff924c, #ffca3a, #8ac926, #1982c4, #6a4c93, #f15bb5 on base #0a0a14. Full spectrum, muted. Soft grain. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+49. Onyx Minimal
+Remotion, 3840x2160, 60fps, 10s/300 frames. Seamless loop. 3 blobs (blur 260px) very slow drift. Colors: #1f1f1f, #3a3a3a, #565656 on base #0a0a0a. Ultra-minimal dark. Fine grain + strong vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
+
+50. Sunrise Gold-Pink
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop. 5 blobs (blur 210px) gentle rise. Colors: #ffd6a5, #ffadad, #ff9a8b, #ffc3a0, #ffb997 on base #2b1524. Warm dawn glow. Soft grain + vignette. Files: Root.tsx, MeshGradientVideo.tsx, components/GradientBlobs.tsx, components/GrainOverlay.tsx, components/Vignette.tsx. Render: --codec=h264 --crf=16 --gl=angle
