@@ -1,5 +1,5 @@
 {
-  "name": "remotion_claude_ai",
+  "name": "remotion-video-creation",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "render:blobs": "npx remotion render src/index.ts ColorBlobs out/color-blobs.mp4"
   },
   "keywords": [],
-  "author": "",
+  "author": "ali mr nobody",
   "license": "ISC",
   "description": "",
   "dependencies": {

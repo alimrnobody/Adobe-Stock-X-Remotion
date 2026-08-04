@@ -43,9 +43,9 @@ load_dotenv()
 # ─── Paths ────────────────────────────────────────────────────────────────────
 
 SCRIPT_DIR  = Path(__file__).parent.resolve()
-IDEAS_FILE  = SCRIPT_DIR / "video_ideas.txt"
+IDEAS_FILE  = SCRIPT_DIR / "Prompts" / "Prompts.txt"
 SRC_DIR     = SCRIPT_DIR / "src"
-OUT_DIR     = SCRIPT_DIR / "out"
+OUT_DIR     = SCRIPT_DIR / "Output Folder"
 ROOT_TSX    = SRC_DIR / "Root.tsx"
 LOG_FILE    = SCRIPT_DIR / "generate_videos.log"
 
