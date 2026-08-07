@@ -363,7 +363,12 @@ def render_video(component_name: str, output_path: Path) -> bool:
             "src/index.ts",
             component_name,
             str(output_path),
+            "--codec=h264",
+            "--video-bitrate=40M",
+            "--pixel-format=yuv420p",
+            "--color-space=bt709",
             f"--gl={gl}",
+            "--muted",
         ]
         log(f"  [Render] Running: {' '.join(cmd)}")
         result = subprocess.run(

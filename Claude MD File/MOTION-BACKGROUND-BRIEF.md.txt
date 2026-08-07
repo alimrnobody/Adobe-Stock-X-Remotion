@@ -1,0 +1,159 @@
+# Motion Background Production Brief (Remotion → Adobe Stock)
+
+> **Purpose of this file:** Hand this to ANY AI/LLM. After reading it, the AI should
+> fully understand what I do, what I want built, and every technical rule — with zero
+> extra explanation from me. If the AI follows this, the output is ready for Adobe Stock.
+
+---
+
+## 1. Who I am / What I'm doing
+
+- I build **motion background videos** and sell them on **Adobe Stock**.
+- I generate them with **Remotion** (React-based programmatic video framework).
+- I work by writing a **detailed text prompt** (spec) for each clip, then an AI/dev
+  turns that prompt into Remotion code and renders an MP4.
+- I want **many variations fast** — same code template, different colors/motion.
+- My editor project is called **ClipKar** (Remotion + React + Vite + Express). But for
+  stock clips, standalone Remotion compositions are fine.
+
+**My language:** I mostly write in Roman Urdu/Hindi. Reply in the same style, but keep
+all code, hex colors, and technical terms in English.
+
+---
+
+## 2. What I want built (the deliverable)
+
+For each prompt: a **Remotion composition** that renders one seamless-loop motion
+background, 4K, ready to upload to Adobe Stock.
+
+Priority categories (in order):
+1. **Mesh Gradient Loop** — blurred color blobs slowly moving. (My #1 — start here.)
+2. **Plexus / Connected Dots** — moving dots with lines between near ones (corporate/tech).
+3. **Floating Particles / Bokeh** — soft blurred dots drifting, opacity pulse.
+
+Other acceptable types: geometric shapes, waves/lines, aurora, abstract tech, gradient
+transitions. **Avoid** realistic smoke/fire/water/3D fluid — Remotion is bad at those.
+
+---
+
+## 3. The PROMPT TEMPLATE I use (copy this shape exactly)
+
+Every clip I request looks like this — frame-accurate and self-contained:
+
+```
+Remotion, 3840x2160, 60fps, 8s/240 frames. Seamless loop.
+<Motion description: how many blobs/dots/particles, blur amount, movement path>.
+Colors: <exact hex list> on base <hex>.
+<Extra effects: grain, vignette, opacity pulse, glow>.
+Files: Root.tsx, <MainVideo>.tsx, components/<X>.tsx, components/<Y>.tsx.
+Render: --codec=h264 --video-bitrate=40M --pixel-format=yuv420p --color-space=bt709 --gl=angle --muted
+```
+
+**Reference example (a countdown, shows the detail level I like):**
+```
+Remotion, 3840x2160, 60fps, 8s/240 frames.
+Frame 0-20: Sepia "READY?" fades in with flickering brightness (opacity jitter).
+Frame 20-50: "3" appears with flicker + occasional vertical scratch-line texture.
+Frame 50-80: "2" replaces "3". Frame 80-110: "1" replaces "2".
+Frame 110-150: "GO!" bursts brightest, flicker calms, dust/scratch fades out.
+Background sepia film grain.
+Files: Root.tsx, ProjectorCountdownVideo.tsx, components/FlickerOverlay.tsx, components/ScratchTexture.tsx.
+Render: --codec=h264 --video-bitrate=40M --pixel-format=yuv420p --color-space=bt709 --muted.
+```
+
+**What makes a prompt good (always include):**
+- Exact **resolution, fps, duration in seconds AND frames**
+- For countdowns/story clips: **frame-by-frame timeline** (0-20, 20-50, …)
+- For loops: the word **"Seamless loop"** + **exact hex colors**
+- **File names** to create
+- **Render command**
+
+---
+
+## 4. Adobe Stock hard requirements (output MUST meet these)
+
+| Thing            | Requirement                                              |
+|------------------|----------------------------------------------------------|
+| Resolution       | **4K = 3840×2160** (minimum 1080p)                        |
+| FPS              | 60fps (or 30 — but keep consistent)                      |
+| Length           | ~5–30 sec (short clips)                                   |
+| **Loop**         | **Seamless** — frame 0 must equal the last frame         |
+| Format/codec     | H.264 MP4, high quality (**--video-bitrate=40M --pixel-format=yuv420p --color-space=bt709 --muted**), or ProRes MOV     |
+| Transparency     | Only if needed → ProRes 4444 (`--codec=prores --prores-profile=4444`) |
+| Content          | No logos, brands, trademarked fonts, or copyrighted material |
+
+---
+
+## 5. Remotion technical RULES (non-negotiable — breaking these = broken video)
+
+1. **`--gl=angle` is REQUIRED when rendering** anything with heavy CSS `blur()` / WebGL.
+   Without it the video renders **black**. Always append `--gl=angle`.
+
+2. **Seamless loop = use `sin`/`cos` for all motion.** Drive movement off
+   `useCurrentFrame()` through sine/cosine so the value at frame 0 equals the value at the
+   last frame. Never use linear motion that "jumps back" at loop end.
+   Example: `x = centerX + Math.sin((frame / durationInFrames) * Math.PI * 2) * radius`
+
+3. **NEVER use `Math.random()` directly.** It returns a new value every frame → the video
+   "jitters"/flickers. Use a **seeded random** (Remotion's `random("seed")`) or pure
+   frame-based math so each element's path is deterministic.
+
+4. **All `@remotion/*` packages must share the EXACT same version.** Upgrade together.
+
+5. **An image inside a `type:"clip"` shot renders black** (uses OffthreadVideo). Use
+   `type:"image"` for stills. (ClipKar-specific, but good to know.)
+
+6. **Fonts can freeze the Player.** `loadFont()` blocks via `delayRender`. Only block
+   during rendering, not in the live editor.
+
+7. **Verify visually** with `npx remotion still` or real Chrome — some headless browsers
+   screenshot the Remotion layer as black even when it's correct.
+
+---
+
+## 6. Standard file structure for a mesh-gradient clip
+
+```
+Root.tsx                        ← registers the <Composition> (id, size, fps, durationInFrames)
+MeshGradientVideo.tsx           ← main scene: <AbsoluteFill> base color + blobs + overlays
+components/GradientBlobs.tsx     ← N blurred circles moving on sin/cos paths, CSS blur()
+components/GrainOverlay.tsx      ← subtle film-grain layer on top
+components/Vignette.tsx          ← (optional) darkened edges
+```
+
+Blob recipe: absolutely-positioned `<div>` circles, big `border-radius:50%`, strong
+`filter: blur(200px)`, `mix-blend-mode` optional, position/scale animated via sine.
+
+---
+
+## 7. Render commands
+
+```bash
+# Standard 4K H.264 for Adobe Stock
+npx remotion render <CompositionId> out.mp4 --codec=h264 --video-bitrate=40M --pixel-format=yuv420p --color-space=bt709 --gl=angle --muted
+
+# Transparent (alpha) pack
+npx remotion render <CompositionId> out.mov --codec=prores --prores-profile=4444 --gl=angle
+
+# Single frame preview (to check it's not black)
+npx remotion still <CompositionId> out.png --frame=90 --gl=angle
+```
+
+---
+
+## 8. How to give me variations
+
+I like getting **many prompts at once** (e.g. 50) from ONE template — each with a
+different **color palette + mood** (Sunset, Ocean, Corporate Blue, Neon, Pastel, Gold,
+Aurora, Deep Space, Teal-Orange, Monochrome, etc.), varying **blob/dot count**,
+**blur**, and **duration** (8s/10s/12s). Keep everything else (4K, 60fps, loop, render
+cmd) identical.
+
+---
+
+## 9. One-line summary for the AI
+
+> "Build seamless-loop 4K/60fps motion backgrounds in Remotion for Adobe Stock. Use
+> sin/cos motion + seeded random, heavy CSS blur for mesh gradients, always render with
+> `--codec=h264 --video-bitrate=40M --pixel-format=yuv420p --color-space=bt709 --gl=angle --muted`. Give me frame-accurate prompts and many
+> color/mood variations from one template."

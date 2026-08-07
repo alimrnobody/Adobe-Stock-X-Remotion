@@ -44,116 +44,136 @@ def parse_prompts():
         if not lines:
             continue
         
-        title_match = re.match(r'^(\d+)\.\s*(.+)$', lines[0])
+        full_text = " ".join(lines)
+        
+        # Match prompt line like "1. **Corporate Blue Network** — Remotion..." or "1. Corporate Blue Network..."
+        title_match = re.search(r'^\s*(\d+)\.\s*(?:\*\*)?(.+?)(?:\*\*)?\s*(?:—|-|:)\s*(.+)$', full_text)
         if not title_match:
-            continue
-        
-        prompt_id = int(title_match.group(1))
-        title = title_match.group(2)
-        desc = lines[1] if len(lines) > 1 else ""
-        
-        words = re.sub(r'[^a-zA-Z0-9 ]', ' ', title).split()
+            # Fallback title match
+            title_match = re.search(r'^\s*(\d+)\.\s*(.+)$', lines[0])
+            if not title_match:
+                continue
+            prompt_id = int(title_match.group(1))
+            title = title_match.group(2)
+            desc = " ".join(lines[1:]) if len(lines) > 1 else ""
+        else:
+            prompt_id = int(title_match.group(1))
+            title = title_match.group(2).strip()
+            desc = title_match.group(3).strip()
+            
+        # Clean markdown bold/formatting from title
+        clean_title = re.sub(r'[\*\_\-]', '', title).strip()
+        words = re.sub(r'[^a-zA-Z0-9 ]', ' ', clean_title).split()
         comp_name = "".join(w.capitalize() for w in words)
-        
+        if not comp_name:
+            comp_name = f"AnimPrompt{prompt_id}"
+            
         kebab_name = re.sub(r'(?<!^)(?=[A-Z])', '-', comp_name).lower() + ".mp4"
         
+        # FPS (default 60)
         fps_m = re.search(r'(\d+)fps', desc)
         fps = int(fps_m.group(1)) if fps_m else 60
         
+        # Frames (e.g., 480 frames, 600 frames, 720 frames)
         frames_m = re.search(r'(\d+)\s*frames', desc)
-        frames = int(frames_m.group(1)) if frames_m else 240
+        frames = int(frames_m.group(1)) if frames_m else 480
         
-        blur_m = re.search(r'blur\s*(\d+)px', desc)
-        blur = int(blur_m.group(1)) if blur_m else 220
+        # Dots count (default 80)
+        dots_m = re.search(r'(\d+)\s+dots', desc, re.IGNORECASE)
+        dots_count = int(dots_m.group(1)) if dots_m else 80
         
-        blobs_m = re.search(r'(\d+)\s+(?:blurred\s+)?blobs', desc, re.IGNORECASE)
-        blobs_count = int(blobs_m.group(1)) if blobs_m else 5
+        # Dot size px (default 4)
+        dot_size_m = re.search(r'size\s*(\d+)px', desc, re.IGNORECASE)
+        dot_size = int(dot_size_m.group(1)) if dot_size_m else 4
         
-        colors_part = desc
-        base_color = "#0a0a14"
-        if "on base" in desc:
-            parts = desc.split("on base")
-            colors_part = parts[0]
-            base_m = re.search(r'#([0-9a-fA-F]{6})', parts[1])
-            if base_m:
-                base_color = "#" + base_m.group(1)
+        # Connection distance px (default 220)
+        conn_m = re.search(r'connection\s+distance\s*(\d+)px', desc, re.IGNORECASE)
+        conn_dist = int(conn_m.group(1)) if conn_m else 220
         
-        hex_colors = re.findall(r'#([0-9a-fA-F]{6})', colors_part)
-        if base_color[1:] in hex_colors and len(hex_colors) > 1:
-            hex_colors.remove(base_color[1:])
-        hex_colors = ["#" + c for c in hex_colors]
-        if not hex_colors:
-            hex_colors = ["#ff9a5a", "#ff6b6b", "#ffd280", "#c8467a", "#ffb37a"]
-            
+        # Dot color
+        dot_color_m = re.search(r'Dot\s+color\s*(#[0-9a-fA-F]{6})', desc, re.IGNORECASE)
+        dot_color = dot_color_m.group(1) if dot_color_m else "#48cae4"
+        
+        # Line color
+        line_color_m = re.search(r'line\s+color\s*(#[0-9a-fA-F]{6})', desc, re.IGNORECASE)
+        line_color = line_color_m.group(1) if line_color_m else "#0096c7"
+        
+        # Base color
+        base_color_m = re.search(r'Base\s*(#[0-9a-fA-F]{6})', desc, re.IGNORECASE)
+        base_color = base_color_m.group(1) if base_color_m else "#03111f"
+        
+        has_glow = "glow" in desc.lower()
         has_vignette = "vignette" in desc.lower()
-        has_grain = "grain" in desc.lower()
-        has_breathe = "breathe" in desc.lower() or "scale" in desc.lower()
         
         parsed.append({
             "id": prompt_id,
-            "title": title,
+            "title": clean_title,
             "comp_name": comp_name,
             "kebab_name": kebab_name,
             "fps": fps,
             "frames": frames,
-            "blur": blur,
-            "blobs_count": blobs_count,
-            "colors": hex_colors,
+            "dots_count": dots_count,
+            "dot_size": dot_size,
+            "conn_dist": conn_dist,
+            "dot_color": dot_color,
+            "line_color": line_color,
             "base_color": base_color,
+            "has_glow": has_glow,
             "has_vignette": has_vignette,
-            "has_grain": has_grain,
-            "has_breathe": has_breathe,
             "desc": desc
         })
     return parsed
 
-def generate_tsx(item):
+def generate_plexus_tsx(item):
     comp_name = item["comp_name"]
-    blobs_count = item["blobs_count"]
-    colors = item["colors"]
+    dots_count = item["dots_count"]
+    dot_size = item["dot_size"]
+    conn_dist = item["conn_dist"]
+    dot_color = item["dot_color"]
+    line_color = item["line_color"]
     base_color = item["base_color"]
-    blur = item["blur"]
+    has_glow = item["has_glow"]
     has_vignette = item["has_vignette"]
-    has_grain = item["has_grain"]
-    has_breathe = item["has_breathe"]
     
-    blob_configs = []
-    num_colors = len(colors)
-    for i in range(blobs_count):
-        color = colors[i % num_colors]
-        cx = 1920 + ((i - (blobs_count - 1) / 2.0) * 380)
-        cy = 1080 + (((i % 3) - 1) * 280)
-        size = 850 + (i * 120) % 500
-        rx = 320 + (i * 110) % 380
-        ry = 260 + (i * 85) % 320
-        freq1 = 1.0 + (i % 3) * 0.5
-        freq2 = 1.2 + (i % 2) * 0.4
-        phase = round(i * (6.28318 / max(blobs_count, 1)), 3)
-        blob_configs.append({
-            "color": color,
-            "cx": cx,
-            "cy": cy,
-            "size": size,
+    # Pre-compute deterministic node initial positions and sin/cos drift parameters at module level
+    nodes = []
+    for i in range(dots_count):
+        # Even distribution across 3840x2160 screen with margin
+        seed = int(re.sub(r'\D', '', str(hash(f"{comp_name}_{i}")))[-4:])
+        base_x = 200 + ((i % 12) * 310) + ((seed % 150) - 75)
+        base_y = 150 + ((i // 12) * 230) + (((seed // 10) % 150) - 75)
+        
+        rx = 80 + (seed % 140)
+        ry = 70 + ((seed // 3) % 130)
+        freq1 = 1.0 + ((i % 5) * 0.25)
+        freq2 = 0.8 + ((i % 4) * 0.3)
+        phase = round((i * 6.28318) / max(dots_count, 1), 3)
+        
+        nodes.append({
+            "x": base_x,
+            "y": base_y,
             "rx": rx,
             "ry": ry,
-            "phase": phase,
             "freq1": freq1,
             "freq2": freq2,
-            "opacity": round(0.78 + (i % 3) * 0.08, 2)
+            "phase": phase
         })
-
-    blob_js = json.dumps(blob_configs, indent=2)
+        
+    nodes_js = json.dumps(nodes, indent=2)
 
     code = f"""import React from 'react';
 import {{ useCurrentFrame, useVideoConfig, interpolate }} from 'remotion';
 
 const BASE_COLOR = '{base_color}';
-const BLUR_PX = {blur};
-const BLOBS = {blob_js};
+const DOT_COLOR = '{dot_color}';
+const LINE_COLOR = '{line_color}';
+const DOT_SIZE = {dot_size};
+const MAX_CONN_DIST = {conn_dist};
+const NODES = {nodes_js};
 
 export const {comp_name}: React.FC = () => {{
   const frame = useCurrentFrame();
-  const {{ durationInFrames, width, height }} = useVideoConfig();
+  const {{ durationInFrames }} = useVideoConfig();
 
   // Seamless 360-degree loop progress (0 to 2*PI)
   const loopProgress = (frame / durationInFrames) * Math.PI * 2;
@@ -162,6 +182,35 @@ export const {comp_name}: React.FC = () => {{
   const fadeIn = interpolate(frame, [0, 50], [0, 1], {{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }});
   const fadeOut = interpolate(frame, [durationInFrames - 50, durationInFrames], [1, 0], {{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }});
   const opacity = fadeIn * fadeOut;
+
+  // Calculate current node positions for this frame
+  const currentPositions = NODES.map((node) => ({{
+    x: node.x + Math.sin(loopProgress * node.freq1 + node.phase) * node.rx,
+    y: node.y + Math.cos(loopProgress * node.freq2 + node.phase) * node.ry,
+  }}));
+
+  // Compute connecting lines between close nodes
+  const lines: {{ x1: number; y1: number; x2: number; y2: number; lineOpacity: number }}[] = [];
+  const len = currentPositions.length;
+
+  for (let i = 0; i < len; i++) {{
+    for (let j = i + 1; j < len; j++) {{
+      const dx = currentPositions[i].x - currentPositions[j].x;
+      const dy = currentPositions[i].y - currentPositions[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < MAX_CONN_DIST) {{
+        const lineOpacity = (1 - dist / MAX_CONN_DIST) * 0.75;
+        lines.push({{
+          x1: currentPositions[i].x,
+          y1: currentPositions[i].y,
+          x2: currentPositions[j].x,
+          y2: currentPositions[j].y,
+          lineOpacity,
+        }});
+      }}
+    }}
+  }}
 
   return (
     <div
@@ -174,68 +223,59 @@ export const {comp_name}: React.FC = () => {{
         opacity,
       }}}}
     >
-      {{/* Gradient Blobs Layer */}}
-      <div
-        style={{{{
-          position: 'absolute',
-          inset: -250,
-          filter: `blur(${{BLUR_PX}}px)`,
-          transform: 'scale(1.15)',
-        }}}}
-      >
-        {{BLOBS.map((blob, idx) => {{
-          // Sin/Cos seamless drifting paths
-          const offsetX = Math.sin(loopProgress * blob.freq1 + blob.phase) * blob.rx;
-          const offsetY = Math.cos(loopProgress * blob.freq2 + blob.phase) * blob.ry;
-          
-          {"const scale = 1 + 0.1 * Math.sin(loopProgress * 2 + blob.phase);" if has_breathe else "const scale = 1;"}
-
-          return (
-            <div
-              key={{idx}}
-              style={{{{
-                position: 'absolute',
-                left: blob.cx + offsetX - blob.size / 2,
-                top: blob.cy + offsetY - blob.size / 2,
-                width: blob.size,
-                height: blob.size,
-                borderRadius: '50%',
-                backgroundColor: blob.color,
-                opacity: blob.opacity,
-                transform: `scale(${{scale}})`,
-                mixBlendMode: idx % 2 === 0 ? 'screen' : 'normal',
-              }}}}
-            />
-          );
-        }})}}
-      </div>
-
-      {f'''{{/* Film Grain Overlay */}}
       <svg
         style={{{{
-          position: 'absolute',
-          top: 0,
-          left: 0,
           width: '100%',
           height: '100%',
-          opacity: 0.06,
-          pointerEvents: 'none',
-          mixBlendMode: 'overlay',
+          position: 'absolute',
+          inset: 0,
         }}}}
+        viewBox="0 0 3840 2160"
       >
-        <filter id="grain-{comp_name}">
-          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#grain-{comp_name})" />
-      </svg>''' if has_grain else ''}
+        {f'''<defs>
+          <filter id="glow-{comp_name}" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>''' if has_glow else ''}
+
+        <g {f'filter="url(#glow-{comp_name})"' if has_glow else ''}>
+          {{/* Plexus Connecting Lines */}}
+          {{lines.map((line, idx) => (
+            <line
+              key={{idx}}
+              x1={{line.x1}}
+              y1={{line.y1}}
+              x2={{line.x2}}
+              y2={{line.y2}}
+              stroke={{LINE_COLOR}}
+              strokeWidth={{1.5}}
+              strokeOpacity={{line.lineOpacity}}
+            />
+          ))}}
+
+          {{/* Plexus Dots / Nodes */}}
+          {{currentPositions.map((pos, idx) => (
+            <circle
+              key={{idx}}
+              cx={{pos.x}}
+              cy={{pos.y}}
+              r={{DOT_SIZE}}
+              fill={{DOT_COLOR}}
+            />
+          ))}}
+        </g>
+      </svg>
 
       {f'''{{/* Soft Vignette Overlay */}}
       <div
         style={{{{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.65) 100%)',
+          background: 'radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.7) 100%)',
           pointerEvents: 'none',
         }}}}
       />''' if has_vignette else ''}
@@ -272,7 +312,7 @@ def render_item(item):
         log(f"SKIPPING {comp_name} — already rendered at {out_file.name}")
         return True
 
-    log(f"Rendering [{item['id']}/50] {comp_name} -> {out_file.name} ({item['frames']} frames @ {item['fps']}fps)...")
+    log(f"Rendering [{item['id']}/100] {comp_name} -> {out_file.name} ({item['frames']} frames @ {item['fps']}fps)...")
     env = {**os.environ, "CI": "true"}
 
     for gl in ["angle", "swiftshader"]:
@@ -282,7 +322,12 @@ def render_item(item):
             "src/index.ts",
             comp_name,
             str(out_file),
+            "--codec=h264",
+            "--video-bitrate=40M",
+            "--pixel-format=yuv420p",
+            "--color-space=bt709",
             f"--gl={gl}",
+            "--muted",
             "--concurrency=8"
         ]
         res = subprocess.run(cmd, cwd=str(SCRIPT_DIR), env=env, capture_output=True, text=True)
@@ -296,15 +341,22 @@ def render_item(item):
     log(f"ERROR: Failed to render {comp_name}")
     return False
 
+def blank_prompts_file():
+    try:
+        PROMPTS_FILE.write_text("\n", encoding="utf-8")
+        log("Successfully blanked Prompts/Prompts.txt after completing all renders!")
+    except Exception as e:
+        log(f"Error blanking Prompts.txt: {e}")
+
 def main():
     items = parse_prompts()
-    log(f"=== Starting Clean Process for {len(items)} Prompts ===")
+    log(f"=== Starting Batch Process for {len(items)} Prompts ===")
     
     for item in items:
         file_path = SRC_DIR / f"{item['comp_name']}.tsx"
-        code = generate_tsx(item)
+        code = generate_plexus_tsx(item)
         file_path.write_text(code, encoding="utf-8")
-    log("Generated 50 TSX component files in src/")
+    log(f"Generated {len(items)} TSX component files in src/")
 
     patch_root_tsx_clean(items)
 
@@ -318,6 +370,9 @@ def main():
             failed += 1
 
     log(f"=== FINISHED ALL RENDERS: {succeeded} succeeded, {failed} failed out of {len(items)} ===")
+    
+    if succeeded == len(items):
+        blank_prompts_file()
 
 if __name__ == "__main__":
     main()
